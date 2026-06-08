@@ -16,6 +16,21 @@ def lectorCsv (ruta_archivo):
     except Exception as e:
         print(f"Ocurrio un error inesperado: {e}")
 
+def guardarCsv (paises, ruta_archivo):
+    try:
+        with open (ruta_archivo, "w", encoding="utf8") as archivo:
+            campos = ["nombre", "poblacion", "superficie", "continente"]
+            escritor = csv.DictWriter(archivo, fieldnames=campos)
+            escritor.writeheader()
+            for pais in paises:
+                escritor.writerow(pais)
+    except FileNotFoundError:
+        print(f"Error: El archivo {ruta_archivo} no se encontro")
+    except KeyError:
+        print("Error: Revise los encabezados")
+    except Exception as e:
+        print(f"Ocurrio un error inesperado: {e}")
+
 def agregarPais (paises):
     nuevopais = input("Ingrese el nombre del pais: ")
     nuevopais = nuevopais.title().strip()
@@ -39,6 +54,7 @@ def agregarPais (paises):
         else:
             pais = {"nombre": nuevopais, "poblacion": poblacion, "superficie": superficie, "continente": continente}
             paises.append(pais)
+            guardarCsv (paises, ruta_archivo)
             print(f"El pais {nuevopais} fue agregado correctamente")
     except ValueError as e:
         print(e)
