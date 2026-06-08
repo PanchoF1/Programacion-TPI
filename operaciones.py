@@ -1,6 +1,3 @@
-from datos import lectorCsv
-paises = lectorCsv("paises.csv")
-
 def buscarPais(paises):
     buscarPais = input("Ingrese el nombre del pais a consultar: ")
     buscarPais = buscarPais.title()
