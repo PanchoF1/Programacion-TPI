@@ -96,25 +96,3 @@ def actualizarPais (paises):
             return
     except Exception as e:
         print(e)
-
-def buscarPais(paises):
-    buscarPais = input("Ingrese el nombre del pais a consultar: ")
-    buscarPais = buscarPais.title()
-    buscarPais = buscarPais.strip()
-    if buscarPais == "":
-        print("El nombre del pais no puede estar vacio")
-        return
-    elif len(paises) == 0:
-        print("Archivo vacio")
-        return
-    encontrado = False
-    for pais in paises:
-        if buscarPais in pais["nombre"]: 
-            print(f"""Los datos de {buscarPais} son: 
-                Poblacion: {pais["poblacion"]} 
-                Superficie: {pais["superficie"]} 
-                Continente: {pais["continente"]} """)
-            encontrado = True
-    if not encontrado:
-        print("Pais no encontrado")
-    return
