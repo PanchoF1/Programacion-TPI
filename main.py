@@ -1,7 +1,7 @@
 from datos import lectorCsv, actualizarPais, agregarPais, buscarPais
 paises = lectorCsv("paises.csv")
 opcion = 0
-while opcion != 6:
+while opcion != 5:
     print("""\nMenu: 
         1. Agregar un pais 
         2. Actualizar pais
