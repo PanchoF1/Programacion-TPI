@@ -59,3 +59,40 @@ def agregarPais (paises):
     except ValueError as e:
         print(e)
         return
+
+def actualizarPais (paises):
+    try:
+        try:
+            buscarPais = input("Ingrese el nombre del pais a modificar: ")
+            buscarPais = buscarPais.title()
+            buscarPais = buscarPais.strip()
+            if buscarPais == "":
+                print("El nombre del pais no puede estar vacio")
+                return
+            elif len(paises) == 0:
+                print("Archivo vacio")
+                return
+            encontrado = False
+            for pais in paises:
+                if pais["nombre"].title().strip() == buscarPais:
+                    try:
+                        poblacion = int(input(f"Ingrese la poblacion de {buscarPais}: "))
+                        superficie = int(input(f"Ingrese la superficie de {buscarPais}: "))
+                        if poblacion < 0 or superficie < 0:
+                            raise ValueError("Los valores no pueden ser negativos")
+                        pais["poblacion"] = poblacion
+                        pais["superficie"] = superficie
+                        guardarCsv (paises, ruta_archivo)
+                        print("Nuevos valores cargados")
+                        encontrado = True
+                    except ValueError as e:
+                        print(e)
+                        return
+            if not encontrado:
+                print("Pais no encontrada")
+                return
+        except ValueError as e:
+            print(e)
+            return
+    except Exception as e:
+        print(e)
