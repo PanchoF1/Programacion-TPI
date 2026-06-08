@@ -109,7 +109,7 @@ def buscarPais(paises):
         return
     encontrado = False
     for pais in paises:
-        if pais["pais"].title().strip() == buscarPais: 
+        if pais["nombre"].title().strip() == buscarPais: 
             print(f"""Los datos de {buscarPais} son: 
                 Poblacion: {pais["poblacion"]} 
                 Superficie: {pais["superficie"]} 
