@@ -15,3 +15,31 @@ def lectorCsv (ruta_archivo):
         print("Error: Revise los encabezados")
     except Exception as e:
         print(f"Ocurrio un error inesperado: {e}")
+
+def agregarPais (paises):
+    nuevopais = input("Ingrese el nombre del pais: ")
+    nuevopais = nuevopais.title().strip()
+    if nuevopais == "":
+        print ("El nombre del pais no puede estar vacio")
+        return
+    for pais in paises:
+        if pais["nombre"].title().strip() == nuevopais:
+            print ("El pais ya esta ingresado")
+            return
+    try:
+        poblacion = int(input(f"Ingrese la poblacion de {nuevopais}: "))
+        superficie = int(input(f"Ingrese la superficie de {nuevopais}: "))
+        continente = input(f"Ingrese el continente de {nuevopais}: ")
+        continente = continente.lower().strip()
+        if poblacion < 0 or superficie < 0:
+            raise ValueError("Los valores no pueden ser negativos")
+        if continente == "":
+            print ("El nombre del continente no puede estar vacio")
+            return
+        else:
+            pais = {"nombre": nuevopais, "poblacion": poblacion, "superficie": superficie, "continente": continente}
+            paises.append(pais)
+            print(f"El pais {nuevopais} fue agregado correctamente")
+    except ValueError as e:
+        print(e)
+        return
