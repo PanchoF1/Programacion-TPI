@@ -2,13 +2,16 @@ def buscarPais(paises):
     buscarPais = input("Ingrese el nombre del pais a consultar: ")
     buscarPais = buscarPais.title()
     buscarPais = buscarPais.strip()
+    # Validación: Evitar que la búsqueda se procese con un campo vacío
     if buscarPais == "":
         print("El nombre del pais no puede estar vacio")
         return
+   # Validación: Verificar si la base de datos en memoria no contiene elementos
     elif len(paises) == 0:
         print("Archivo vacio")
         return
     encontrado = False
+    # Recorrer la lista de países (diccionarios) para buscar coincidencias
     for pais in paises:
         if buscarPais in pais["nombre"]: 
             print(f"""Los datos de {buscarPais} son: 
@@ -24,13 +27,16 @@ def filtroContinente(paises):
     buscarContinente = input("Ingrese el nombre del continente a consultar: ")
     buscarContinente = buscarContinente.title()
     buscarContinente = buscarContinente.strip()
+    # Validación: El sistema rechaza búsquedas en blanco
     if buscarContinente == "":
         print("El nombre del continente no puede estar vacio")
         return
+    # Validación: Controlar que la lista de países tenga registros cargados
     elif len(paises) == 0:
         print("Archivo vacio")
         return
     encontrado = False
+    # Iterar sobre cada uno de los países cargados desde el CSV
     for pais in paises:
         if buscarContinente in pais["continente"]:
             if not encontrado:
@@ -51,6 +57,7 @@ def filtroRangoPoblacion(paises):
     try:
         min_pob = int(input("Ingrese la poblacion minima: "))
         max_pob = int(input("Ingrese la poblacion maxima: "))
+        # Validaciones del filtro de rango
         if min_pob < 0 or max_pob < 0:
             print("Error: Los rangos de poblacion no pueden ser negativos.")
             return
@@ -79,6 +86,7 @@ def filtroRangoSuperficie(paises):
     try:
         min_sup = int(input("Ingrese la superficie minima (km²): "))
         max_sup = int(input("Ingrese la superficie maxima (km²): "))
+        # Validaciones del filtro de rango
         if min_sup < 0 or max_sup < 0:
             print("Error: Los rangos de superficie no pueden ser negativos.")
             return
@@ -130,10 +138,12 @@ def ordenarPaises(paises):
         else:
             print("Opcion de sentido invalida.")
             return
+        # Aplicar ordenamiento usando la función nativa sorted y lambdas
         if criterio == "nombre":
             paises_ordenados = sorted(paises, key=lambda x: x["nombre"].lower(), reverse=not ascendente)
         else:
             paises_ordenados = sorted(paises, key=lambda x: x[criterio], reverse=not ascendente)
+       # Mostrar la lista ordenada
         print(f"\n--- Lista de Paises Ordenados por {criterio.title()} ---")
         for pais in paises_ordenados:
             print(f"País: {pais['nombre']} | Población: {pais['poblacion']:,} | Superficie: {pais['superficie']:,} km² | Continente: {pais['continente']}")
@@ -144,18 +154,23 @@ def mostrarEstadisticas(paises):
     if len(paises) == 0:
         print("Archivo vacio. No se pueden calcular estadisticas.")
         return
+    # Inicializar variables para búsquedas de mayor y menor
     pais_mayor_pob = paises[0]
     pais_menor_pob = paises[0]    
     suma_poblacion = 0
     suma_superficie = 0
     conteo_continentes = {}
+    # Procesar todo el dataset en una sola pasada
     for pais in paises:
+        # Mayor y menor población
         if pais["poblacion"] > pais_mayor_pob["poblacion"]:
             pais_mayor_pob = pais
         if pais["poblacion"] < pais_menor_pob["poblacion"]:
             pais_menor_pob = pais
+        # Acumular para los promedios
         suma_poblacion += pais["poblacion"]
         suma_superficie += pais["superficie"]
+        # Conteo por continente (Manejo de diccionarios dinámicos)
         cont = pais["continente"].strip().title()
         if cont in conteo_continentes:
             conteo_continentes[cont] += 1
