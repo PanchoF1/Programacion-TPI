@@ -89,7 +89,7 @@ def actualizarPais (paises):
                         print(e)
                         return
             if not encontrado:
-                print("Pais no encontrada")
+                print("Pais no encontrado")
                 return
         except ValueError as e:
             print(e)
