@@ -45,7 +45,7 @@ def agregarPais (paises):
         poblacion = int(input(f"Ingrese la poblacion de {nuevopais}: "))
         superficie = int(input(f"Ingrese la superficie de {nuevopais}: "))
         continente = input(f"Ingrese el continente de {nuevopais}: ")
-        continente = continente.lower().strip()
+        continente = continente.title().strip()
         if poblacion < 0 or superficie < 0:
             raise ValueError("Los valores no pueden ser negativos")
         if continente == "":
