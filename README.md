@@ -57,3 +57,5 @@ Francisco:
 - Validaciones de los filtros
 
 ## Links
+Video demostracion: https://youtu.be/7GLkA3XWgsk
+PDF: file:///C:/Users/Uro/OneDrive/Escritorio/Integrador%20Programacion/Integrador%20Programacion.pdf
